@@ -1,10 +1,6 @@
-div(ng-include='\'partials/navbar.html\'')
-
 .row
-  .col-sm-12
-    h1 Sign up
-    
-  .col-sm-12
+  .col-md-8.col-md-offset-2
+    H3 Sign up
     form.form(name='form', ng-submit='register(form)', novalidate='')
       .form-group(ng-class='{ \'has-success\': form.name.$valid && submitted, \'has-error\': form.name.$invalid && submitted }')
         label Name
@@ -30,9 +26,9 @@ div(ng-include='\'partials/navbar.html\'')
         p.help-block(ng-show='form.password.$error.mongoose')
           | {{ errors.password }}
 
-      button.btn.btn-lg.btn-primary(type='submit') Sign up
-.row
-  .col-sm-12
-    hr
-    | Have an account? 
-    a.text-center.new-account(href='/login') Log in.
+      .row
+        .col-md-1
+          button.btn.btn-default(type='submit', ng-init='redirected(form)') Sign up
+        .col-md-10.col-md-offset-1
+          | Have an account? 
+          a.text-center.new-account(href='/login') 

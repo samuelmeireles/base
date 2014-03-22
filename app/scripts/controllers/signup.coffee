@@ -1,10 +1,21 @@
 'use strict'
 
 angular.module('baseApp')
-  .controller 'SignupCtrl', ($scope, Auth, $location) ->
+  .controller 'SignupCtrl', ($scope, $rootScope, $location, Auth) ->
+
     $scope.user = {}
+    if $rootScope.userTemp
+      $scope.user = angular.copy $rootScope.userTemp
+      delete $rootScope.userTemp
+
     $scope.errors = {}
-    
+    if $rootScope.errorsTemp
+      $scope.errors = angular.copy $rootScope.errorsTemp
+      delete $rootScope.errorsTemp
+      
+    $scope.redirected = (form) ->
+      if Object.keys($scope.user).length != 0 then $scope.register(form)
+
     $scope.register = (form) ->
       $scope.submitted = true
 
@@ -15,7 +26,7 @@ angular.module('baseApp')
           password: $scope.user.password
         ).then( ->
           # Account created, redirect to home
-          $location.path '/'
+          $location.path '/dashboard'
         ).catch( (err) ->
           err = err.data
           $scope.errors = {}

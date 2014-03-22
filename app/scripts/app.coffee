@@ -6,7 +6,7 @@ angular.module('baseApp', [
   'ngSanitize',
   'ngRoute'
 ])
-  .config ($routeProvider, $locationProvider, $httpProvider) ->
+  .config ($routeProvider, $locationProvider, $httpProvider, $rootScopeProvider) ->
     $routeProvider
       .when '/',
         templateUrl: 'partials/main'
@@ -15,15 +15,22 @@ angular.module('baseApp', [
       .when '/login',
         templateUrl: 'partials/login'
         controller: 'LoginCtrl'
-      .when '/signup', 
+      .when '/signup',
         templateUrl: 'partials/signup'
         controller: 'SignupCtrl'
       .when '/settings',
         templateUrl: 'partials/settings'
         controller: 'SettingsCtrl'
         authenticate: true
+      .when '/dashboard',
+        templateUrl: 'partials/dashboard'
+        controller: 'DashboardCtrl'
+        authenticate: true
+      .when '/404',
+        templateUrl: 'partials/404'
+        controller: '404Ctrl'
       .otherwise
-        redirectTo: '/'
+        redirectTo: '/404'
 
     $locationProvider.html5Mode true
   
