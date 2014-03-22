@@ -11,7 +11,6 @@ angular.module('baseApp', [
       .when '/',
         templateUrl: 'partials/main'
         controller: 'MainCtrl'
-      
       .when '/login',
         templateUrl: 'partials/login'
         controller: 'LoginCtrl'
@@ -38,7 +37,6 @@ angular.module('baseApp', [
     $httpProvider.interceptors.push ['$q', '$location', ($q, $location) ->
       responseError: (response) ->
         if response.status is 401
-          $location.path '/login'
           $q.reject response
         else
           $q.reject response
