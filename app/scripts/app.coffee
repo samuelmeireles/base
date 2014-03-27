@@ -44,5 +44,7 @@ angular.module('baseApp', [
   .run ($rootScope, $location, Auth) ->
     
     # Redirect to login if route requires auth and you're not logged in
+    # Redirect to dashboard if user is logged and tries to access / route
     $rootScope.$on '$routeChangeStart', (event, next) ->
       $location.path '/login'  if next.authenticate and not Auth.isLoggedIn()
+      $location.path '/dashboard' if (next.originalPath == '/' or next.originalPath == '/login' or next.originalPath == '/signup') and Auth.isLoggedIn()
